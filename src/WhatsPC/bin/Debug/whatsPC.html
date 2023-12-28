@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>WebView2 Log</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap'>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        hr {
+            border: 0.5px solid #ccc; /* Adjusted thickness */
+        }
+        #footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 9px;
+            color: #555;
+        }
+        #footer a {
+            color: #555;
+            text-decoration: none;
+        }
+        #btnCheck {
+            font-size: 14px; /* Increased font size */
+            font-weight: bold; /* Made the font bold */
+        }
+    </style>
+</head>
+<body>
+    <div id='logContainer' contenteditable='true'></div>
+    
+    <div>
+        <button id='btnCheck' onclick='runChecks()'>Run Checks</button>
+		<hr>
+              <p><u><font size="2" color="#FF00A8">This app will check what to do with your Toaster?</font></u></p>
+        <p><u><font size="2" color="#FF00A8"><a href="https://github.com/builtbybel/WhatsPC" target="_blank">Learn more about the WhatsPC app...</a></font></u></p>
+
+    </div>
+    <div id='footer'>
+        <p>WhatsPC Icon created by Icon Hubs - Flaticon | <a href='https://www.builtbybel.com' target='_blank'>A Belim app creation (C) 2024.</a></p>
+    
+	</div>
+    <!-- Action! -->
+    <script>
+        function runChecks() {
+            // Notify C# code to run checks
+            window.chrome.webview.postMessage('runChecks');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Handle log messages
+            window.chrome.webview.addEventListener('message', (event) => {
+                const logContainer = document.getElementById('logContainer');
+                logContainer.innerHTML += event.data;
+            });
+        });
+    </script>
+</body>
+</html>
+
