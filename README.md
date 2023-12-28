@@ -4,5 +4,5 @@ This started as a fun application to inform some colleagues that they shouldn't 
 
 The tool essentially employs Chromium as the frontend and utilizes C# in the backend. I'll upload the code later. Perhaps, this could even be the foundation for something more significant – a tool for efficiently and straightforwardly assessing the system's health. It aims to present information to the average user in understandable language.
 
-![WhatsPC_NNepLWFFcr](https://github.com/builtbybel/WhatsPC/assets/57478606/64215ffd-e58b-4d5b-8977-0f333240bea5)
 
+![WhatsPC_uqFfCi3KNE](https://github.com/builtbybel/WhatsPC/assets/57478606/c559c156-6532-48eb-91dc-6cfacc3cc93d)
