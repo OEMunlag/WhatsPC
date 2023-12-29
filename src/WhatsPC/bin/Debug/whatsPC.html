@@ -9,8 +9,20 @@
         body {
             font-family: 'Open Sans', sans-serif;
         }
-        hr {
-            border: 0.5px solid #ccc; /* Adjusted thickness */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        #overlayText {
+            color: white;
+            font-size: 24px;
         }
         #footer {
             text-align: center;
@@ -21,42 +33,227 @@
         #footer a {
             color: #555;
             text-decoration: none;
+			    margin-top: 10px; /* Add margin at the top of the footer */
         }
-        #btnCheck {
-            font-size: 14px; /* Increased font size */
-            font-weight: bold; /* Made the font bold */
+		
+		
+	@keyframes pulse {
+		0% {
+			transform: scale(1);
+		}
+		50% {
+			transform: scale(1.2);
+		}
+		100% {
+			transform: scale(1);
+		}
+	}
+
+	    #heartIcon {
+            color: magenta;
+            font-size: 30px;
+            margin-left: -60px;
+            margin-top: 100px; /* Adjusted margin from the top */
+			 animation: pulse 1s infinite; /* Apply the pulse animation */
         }
+		#btnCheck {
+            font-size: 16px;
+            font-weight: bold; 
+            background-color: #405DE6;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px; /* Adjusted padding */
+            cursor: pointer;
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth color transition */
+            margin-top: 10px; /* Add margin to the "Run Checks" button */
+            margin-left: 0; /* Add margin to separate it from the vertical separator */
+
+        }
+
+        #btnCheck:hover {
+            background-color: #6A4C93; /* Darker color on hover */
+        }
+
+		  #profileButtons {
+			display: flex;
+			justify-content: space-around; /* Space around each button */
+			padding: 10px; /* Set padding */
+			margin-top: 10px; /* Add margin to the top of the profile buttons */
+			border-left: 50px solid transparent; /* Creates a transparent border at the top */
+			border-bottom: 1px solid #ccc; /* Add a border below the transparent border */
+		}
+
+		
+		.profileButton {
+			width: 60px;
+			height: 60px;
+			border: 2px solid #000; /* Add black border */
+			border-radius: 50%; /* Make it round */
+			overflow: hidden; /* Hide overflow for a perfect circle */
+			cursor: pointer;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			position: relative;
+		}
+
+		.profileButton:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(45deg, #FFD700, #FF69B4); /* Gradient background */
+		}
+
+		.profileCaption {
+			font-size: 10px;
+			color: #fff;
+			margin-top: 5px; /* Add margin to the captions */
+			z-index: 1; /* Ensure captions are above the gradient */
+		}
+
+			#logContainer {
+			margin-top: 10px;
+			margin-left: 70px; /* Add margin to separate it from the vertical separator */
+		}
+						
+		   #outputContainer {
+            display: flex;
+            flex-direction: row; /* Align items horizontally */
+            align-items: center; /* Center items vertically */
+            margin-top: 10px;
+			margin-left:70px;
+
+        }
+		
+		/* Hamburger menu */
+		#hamburgerMenu {
+			width: 30px;
+			height: 20px;
+			margin-bottom: 20px; /* Adjusted margin from the bottom */
+			margin-left: 10px; /* Adjusted margin from the left */
+			cursor: pointer;
+			z-index: 2; /* Ensure the hamburger menu is on top of the separator */
+			position: fixed;
+			bottom: 20px; /* Adjusted position from the bottom */
+			left: 10px; /* Adjusted position from the left */
+		}
+
+		/* Vertical separator */
+		#verticalSeparator {
+			width: 1px;
+			height: 100%;
+			background-color: #ccc;
+			margin-right: 10px; /* Margin to the Run Checks button */
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-between;
+			position: absolute;
+			top: 0;
+			left: 60px;
+		}
+
+		  .bar {
+            width: 30px;
+            height: 4px;
+            background-color: #000;
+            margin: 6px 0;
+        }
+		
+		#footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 9px;
+            color: #555;
+        }
+        #footer a {
+            color: #555;
+            text-decoration: none;
+            margin-top: 10px;
+		
+        }
+
+		
     </style>
 </head>
 <body>
+    <div id='overlay'>
+        <div id='overlayText'>Running checks...</div>
+    </div>
+
+    <div id='profileButtons'>
+        <div class='profileButton' onclick='openApp("https://github.com/builtbybel/WhatsPC")'>
+            <div class='profileCaption'>WhatsPC</div>
+        </div>
+        <div class='profileButton' onclick='openApp("https://github.com/builtbybel/Appcopier")'>
+            <div class='profileCaption'>Appcopier</div>
+        </div>
+        <div class='profileButton' onclick='openApp("https://github.com/Bloatynosy")'>
+            <div class='profileCaption'>Bloatynosy</div>
+        </div>
+    </div>
+	
     <div id='logContainer' contenteditable='true'></div>
     
+<div id='outputContainer'>
     <div>
         <button id='btnCheck' onclick='runChecks()'>Run Checks</button>
-		<hr>
-              <p><u><font size="2" color="#FF00A8">This app will check what to do with your Toaster?</font></u></p>
-        <p><u><font size="2" color="#FF00A8"><a href="https://github.com/builtbybel/WhatsPC" target="_blank">Learn more about the WhatsPC app...</a></font></u></p>
-
+        <p><font size="2" color="#FF00A8">This app will check what to do with your Toaster. 240 million PCs could end up in landfills when Windows 10 support ends. <a href="https://www.neowin.net/news/240-million-pcs-could-end-up-in-landfills-when-windows-10-support-ends/" target="_blank">Read more...</a></font></p>
     </div>
-    <div id='footer'>
-        <p>WhatsPC Icon created by Icon Hubs - Flaticon | <a href='https://www.builtbybel.com' target='_blank'>A Belim app creation (C) 2024.</a></p>
-    
+    <div id='logContainer' contenteditable='true'></div>
+</div>
+
+	<div id='footer'>
+		<p>WhatsPC Icon created by Icon Hubs - Flaticon | <a href='https://www.builtbybel.com' target='_blank'>A Belim app creation (C) 2024.</a></p>
 	</div>
+	
+        <!-- Vertical separator with hamburger menu -->
+    <div id='verticalSeparator'>
+		 <span id='heartIcon'>&#x2764;</span>
+        <div id='hamburgerMenu' onclick='toggleMenu()'>
+            <div class='bar'></div>
+            <div class='bar'></div>
+            <div class='bar'></div>
+        </div>
+    </div>
+	
     <!-- Action! -->
     <script>
         function runChecks() {
-            // Notify C# code to run checks
+            // Show overlay
+            document.getElementById('overlay').style.display = 'flex';
+
+            // Notify code to run checks
             window.chrome.webview.postMessage('runChecks');
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
+        function openApp(appUrl) {
+            // Open app URL
+            window.open(appUrl, '_blank');
+        }
+
+	 function toggleMenu() {
+			alert("This feature is yet implemented"); // Display a message when clicking on hamburger menu
+		}
+      window.addEventListener('DOMContentLoaded', () => {
             // Handle log messages
             window.chrome.webview.addEventListener('message', (event) => {
                 const logContainer = document.getElementById('logContainer');
                 logContainer.innerHTML += event.data;
+
+                // Listen to code and check if message indicates that checks are complete
+                if (event.data.includes('Checks completed.')) {
+                    // Hide overlay
+                    document.getElementById('overlay').style.display = 'none';
+                }
             });
         });
     </script>
 </body>
 </html>
-

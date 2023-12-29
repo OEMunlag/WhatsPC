@@ -56,7 +56,7 @@ namespace WhatsPC
             webView.ExecuteScriptAsync("window.scrollTo(0, document.body.scrollHeight);");
         }
 
-        // Helper method to convert Color to hexadecimal representation
+        // Some Helpers to convert Color to hexadecimal
         private string ColorToHex(Color color)
         {
             return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
